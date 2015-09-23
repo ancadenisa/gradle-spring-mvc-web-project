@@ -2,11 +2,9 @@ package com.votesimulation.impl.repository;
 
 import com.votesimulation.impl.entities.VoteSection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,14 +18,14 @@ import java.util.List;
 @Repository
 public class VoteSectionJdbcRepository {
 
-    private EmbeddedDatabaseBuilder dataSource;
+    private DataSource dataSource;
 
     /**
      * Sets the data source this repository will use to load vote sections
      * @param dataSource the data source
      */
     @Autowired
-    public void setDataSource(EmbeddedDatabaseBuilder dataSource) {
+    public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -37,6 +35,7 @@ public class VoteSectionJdbcRepository {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<VoteSection> voteSectionList = new ArrayList<>();
+        DataSource dataSource = this.dataSource;
         try{
             conn = dataSource.getConnection();
             ps = conn.prepareStatement(sql);

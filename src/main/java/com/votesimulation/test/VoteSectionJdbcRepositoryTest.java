@@ -4,6 +4,7 @@ import com.votesimulation.impl.entities.VoteSection;
 import com.votesimulation.impl.repository.VoteSectionJdbcRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 
 import javax.sql.DataSource;
@@ -39,11 +40,10 @@ public class VoteSectionJdbcRepositoryTest {
         assertEquals("VoteSection number is wrong", Integer.valueOf(5), voteSectionList.get(2).getNumber());
     }
 
-    private DataSource createTestDataSource() {
+    private EmbeddedDatabase createTestDataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setName("rewards")
                 .addScript("/com/votesimulation/test/schema.sql")
-                .addScript("/com/votesimulation/test/test-data.sql")
-                .build();
+                .addScript("/com/votesimulation/test/test-data.sql").build();
     }
 }

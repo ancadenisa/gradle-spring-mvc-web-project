@@ -11,35 +11,16 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 @Service
-public class HelloWorldService {
+public class VoteSectionService {
 
-    private static final Logger logger = LoggerFactory.getLogger(HelloWorldService.class);
+    private static final Logger logger = LoggerFactory.getLogger(VoteSectionService.class);
     private VoteSectionJdbcRepository voteSectionJdbcRepository;
 
     @Autowired
-    public HelloWorldService(VoteSectionJdbcRepository voteSectionJdbcRepository) {
+    public VoteSectionService(VoteSectionJdbcRepository voteSectionJdbcRepository) {
         this.voteSectionJdbcRepository = voteSectionJdbcRepository;
     }
 
-    public String getDesc() {
-
-        logger.debug("getDesc() is executed!");
-
-        return "Gradle + Spring MVC Hello World Example";
-
-    }
-
-    public String getTitle(String name) {
-
-        logger.debug("getTitle() is executed! $name : {}", name);
-
-        if (StringUtils.isEmpty(name)) {
-            return "Hello World";
-        } else {
-            return "Hello " + name;
-        }
-
-    }
     public List<VoteSection> getAllVotingSection() {
         //TO DO - use Hibernate JPA for mapping fields and table for the nex entity in play
 
